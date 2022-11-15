@@ -107,3 +107,18 @@ FROM employees
 GROUP BY last_name
 ORDER BY count DESC;
 SELECT * FROM data_analysis8;
+
+-- BONUS
+-- Create a histogram to visualize the most common salary ranges for employees.
+-- Create a bar chart of average salary by title.
+DROP VIEW IF EXISTS bonus_view;
+CREATE VIEW bonus_view AS
+SELECT
+(SELECT titles.title
+	FROM titles
+	WHERE titles.title_id = employees.emp_title ) AS "title",
+(SELECT salaries.salary
+	FROM salaries
+	WHERE employees.emp_no = salaries.emp_no ) AS "salary"
+FROM employees;
+SELECT * FROM bonus_view;
